@@ -48,6 +48,13 @@ class carro:
     def distancia_cargador(self):
         return distance.euclidean(self.posicion,self.cargando.posicion)
         
+    def list_cargador(self,ls_cargadores):
+        ls=[]
+        for x in ls_cargadores:
+            if  distance.euclidean(self.posicion,x.posicion)<=self.rango*0.25:
+                ls.append(x)
+        return ls
+        
                  
                  
                  
