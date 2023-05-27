@@ -45,6 +45,9 @@ class carro:
         self.posicion=self.estacion.posicion
         self.rango=self.rango - distance.euclidean(self.posicion,old_pos)
         self.carga=self.rango/self.tipo
+    def distancia_cargador(self):
+        return distance.euclidean(self.posicion,self.cargando.posicion)
+        
                  
                  
                  
