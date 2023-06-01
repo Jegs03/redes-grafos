@@ -6,3 +6,4 @@ A continuación explicamos lo que se encuentra dentro de los archivos de la carp
 - resultado_comparacion_tiempos.png: gráfico de barras generado a partir de lo obtenido en comparar_promedios_redes.py.
 - emparejamiento.py: algoritmo de emparejamiento generado para resolver el problema desde teoría de grafos.
 - grafos.py: ejecución del algoritmo con los carros y generación del emparejamiento mínimo.
+NOTA IMPORTANTE: en fotos_alg se pueden ver 5 momentos del método heurístico implementado sobre la red. Además, en fotos_rn, se puede ver lo obtenido en los mismos 5 momentos cuando el usuario elige aleatoriamente a donde desplazarse.
