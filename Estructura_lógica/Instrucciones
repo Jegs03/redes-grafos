@@ -1,1 +1,8 @@
-
+A continuación explicamos lo que se encuentra dentro de los archivos de la carpeta Estructura_lógica.
+- clases.py : se encuentran las clases carro y estación_de_carga, las cuales se utilizan como módulos en otros archivos.
+- Final_redes.py: la implementación del método heurístico explicado en el informe. Luego, en este código se ve todo el funcionamiento de la red al igual que los implementos utilizados para su graficación.
+- Final_redes_aleatorio.py: el funcionamiento y graficación del sistema cuando los carros no siguen el método sino que elijen aleatoriamente a donde ir.
+- comparar_promedios_redes.py: código en el que se ejecuta Final_redes.py y Final_redes_aleatorio.py simultaneamente 200 veces. 
+- resultado_comparacion_tiempos.png: gráfico de barras generado a partir de lo obtenido en comparar_promedios_redes.py.
+- emparejamiento.py: algoritmo de emparejamiento generado para resolver el problema desde teoría de grafos.
+- grafos.py: ejecución del algoritmo con los carros y generación del emparejamiento mínimo.
