@@ -1,7 +1,9 @@
 from clases import *
 import networkx as nx
 import matplotlib.pyplot as plt
+from moviepy.editor import *
 costo=0
+nuniter=20
 cor = {1:(35.1492269880214,65.3176294810345), 2:(42.9724164192492,75.0698245254417), 
        3:(34.3980793893049,75.4042635113762), 4:(44.0440862043489,66.6036332231541), 
        5:(41.4380745566023,60.9961554850301), 6:(28.7366803299595,69.0267144154237), 
@@ -65,10 +67,14 @@ for k in size_map:
 zl=[size_map.get(node) for node in g.nodes()]
 
 g.add_edges_from(aristas)
+plt.xlim(0, 80)
+plt.ylim(0, 100)
+plt.autoscale(False)
 nx.draw(g,pos=cor,node_color=cl,node_size=zl)
 plt.savefig(fname='algoritmo_0')
 plt.clf()
-for r in range(5):
+
+for r in range(nuniter):
     for x in ls_carros:
         if x.estado=='ir a cargar':
             costo=costo+x.ir_cargador()
@@ -132,8 +138,18 @@ for r in range(5):
     zl=[size_map.get(node) for node in g.nodes()]
 
     g.add_edges_from(aristas)
+    plt.xlim(0, 80)
+    plt.ylim(0, 100)
+    plt.autoscale(False)
     nx.draw(g,pos=cor,node_color=cl,node_size=zl)
     plt.savefig(fname=f'algoritmo_{r+1}')
     plt.clf()
 
 print(costo)
+print('video')
+frames=[]
+for x in range(nuniter+1):
+    I=ImageClip(f'algoritmo_{x}.png').set_duration(2)
+    frames.append(I)
+Video_Clip=concatenate_videoclips(frames,method='compose')
+Video_Clip.write_videofile('video.mp4',fps=24,remove_temp=True,codec="libx264", audio_codec="aac")
