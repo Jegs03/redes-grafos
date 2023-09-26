@@ -3,7 +3,7 @@ import math
 from scipy.spatial import distance
 
 class carro:
-    def __init__(self,cod, posicion, carga, capacidad,tipo,estacion):
+    def __init__(self,cod, posicion, carga, capacidad,tipo,estacion,clase):
         self.id=cod
         self.posicion=posicion
         self.carga=carga
@@ -13,6 +13,7 @@ class carro:
         self.cargando=False
         self.estacion=estacion
         self.estado='andando'
+        self.clase=clase
     def __str__(self):
         return f"id:{self.id}\npocicion:{self.posicion}\ncarga:{self.carga*100}%\nrango:{self.rango}\nestacion:{self.estacion.id}"
     def hacer_fila(self,punto_de_carga):
@@ -40,7 +41,17 @@ class carro:
                  continue
         self.estacion=minimo
     def buscar_cargador_rn(self,ls_cargadores):
-        self.estacion=rn.choice(ls_cargadores) 
+        self.estacion=rn.choice(ls_cargadores)
+    def buscar_cargador_dis(self,ls_cargadores):
+        minimo=self.estacion
+        for x in ls_cargadores:
+            if  distance.euclidean(self.posicion,x.posicion)<=self.rango:
+                if distance.euclidean(self.posicion,x.posicion)<distance.euclidean(self.posicion,minimo.posicion):
+                    minimo=x
+                else:
+                     continue
+            else:
+                 continue        
     def ir_cargador(self):
         old_pos=self.posicion
         self.posicion=self.estacion.posicion
@@ -100,11 +111,23 @@ def cord_rand(p,r):
     y = r * math.sin(alpha) + p[1]
     return (x,y)
 
-def crear_carros(n,est,i):
+def crear_carros(n1,n2,n3,est,i):
     carros=[]
-    for x in range(n):
+    for x in range(n1):
+        num=x+97+i
         cor=cord_rand(est.posicion,2)
-        car=carro(chr(x+97+i),cor,(rn.triangular(0.25, 1,0.75)),10000,50,est)
+        car=carro(chr(num),cor,(rn.triangular(0.25, 1,0.75)),10000,50,est,'karro')
+        carros.append(car)
+        
+    for y in range(n2):
+        num2=y+num+i
+        cor=cord_rand(est.posicion,2)
+        car=carro(chr(num2),cor,(rn.triangular(0.25, 1,0.75)),15000,60,est,'kamineta')
+        carros.append(car)
+    for z in range(n3):
+        num3=z+num2+1
+        cor=cord_rand(est.posicion,2)
+        car=carro(chr(num3),cor,(rn.triangular(0.25, 1,0.75)),30000,40,est,'kamion')
         carros.append(car)
     return carros 
 
